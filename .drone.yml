@@ -1,0 +1,62 @@
+pipeline:
+  sample-build:
+    image: toroid/drone-kicad:0.5.1
+    pull: true
+    when:
+      branch: master
+    projects:
+      - main: drone-kicad-sample
+        dependencies:
+          templates:
+            - https://github.com/Toroid-io/toroid-kicad-templates.git
+          svglib:
+            - https://github.com/yaqwsx/PcbDraw-Lib
+          svglibdirs:
+            - PcbDraw-Lib/KiCAD-base
+        options:
+          grb:
+            all: true
+          svg: true
+          grb:
+            all: true
+          sch: true
+        variants:
+          - name: "Variant 1"
+            content: "sample1"
+            options:
+              tag:
+                all: true
+              svg: true
+              pcb: true
+              grb:
+                all: true
+          - name: "Variant 2"
+            content: "sample2"
+            options:
+              svg: true
+              pcb: true
+              tag:
+                all: true
+              grb:
+                all: true
+          - name: "Variant 3"
+            content: "sample3"
+            options:
+              tag:
+                all: true
+              svg: true
+              pcb: true
+              grb:
+                all: true
+
+  deploy:
+    image: toroid/drone-mella
+    server: https://cloud.toroid.io
+    remote_folder: "drone-kicad-sample"
+    parentdir: false
+    files:
+      - "CI-BUILD/*"
+    when:
+      event: deployment
+      status: [success, failure]
+    secrets: [mella_username, mella_password]
