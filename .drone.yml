@@ -57,6 +57,6 @@ pipeline:
     files:
       - "CI-BUILD/*"
     when:
-      event: deployment
+      branch: master
       status: [success, failure]
     secrets: [mella_username, mella_password]
