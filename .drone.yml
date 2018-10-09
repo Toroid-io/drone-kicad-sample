@@ -21,7 +21,7 @@ pipeline:
             all: true
           sch: true
         variants:
-          - name: "Variant 1"
+          - name: "Variant_1"
             content: "sample1"
             options:
               tag:
@@ -30,7 +30,7 @@ pipeline:
               pcb: true
               grb:
                 all: true
-          - name: "Variant 2"
+          - name: "Variant_2"
             content: "sample2"
             options:
               svg: true
@@ -39,7 +39,7 @@ pipeline:
                 all: true
               grb:
                 all: true
-          - name: "Variant 3"
+          - name: "Variant_3"
             content: "sample3"
             options:
               tag:
