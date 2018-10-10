@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name TOROID)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/toroid-kicad-library/TOROID.lib)(options "")(descr ""))
+)

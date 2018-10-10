@@ -7,6 +7,8 @@ pipeline:
     projects:
       - main: drone-kicad-sample
         dependencies:
+          libraries:
+            - https://github.com/Toroid-io/toroid-kicad-library.git
           templates:
             - https://github.com/Toroid-io/toroid-kicad-templates.git
           svglib:
@@ -14,17 +16,17 @@ pipeline:
           svglibdirs:
             - PcbDraw-Lib/KiCAD-base
         options:
-          grb:
-            all: true
           svg: true
           grb:
             all: true
           sch: true
+          tags:
+            all: true
         variants:
           - name: "Variant_1"
             content: "sample1"
             options:
-              tag:
+              tags:
                 all: true
               svg: true
               pcb: true
@@ -35,14 +37,14 @@ pipeline:
             options:
               svg: true
               pcb: true
-              tag:
+              tags:
                 all: true
               grb:
                 all: true
           - name: "Variant_3"
             content: "sample3"
             options:
-              tag:
+              tags:
                 all: true
               svg: true
               pcb: true

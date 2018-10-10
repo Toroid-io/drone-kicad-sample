@@ -221,4 +221,15 @@ Text Notes 5300 3950 0    50   ~ 0
 VARIANT: sample3
 Wire Wire Line
 	3600 2825 4525 2825
+$Comp
+L TOROID:commit-trace t1
+U 1 1 5BBE5EE0
+P 3650 1250
+F 0 "t1" H 4028 1228 60  0000 L CNN
+F 1 "commit-trace" H 4028 1122 60  0000 L CNN
+F 2 "toroid-kicad:commit-trace" H 3650 1250 60  0001 C CNN
+F 3 "" H 3650 1250 60  0001 C CNN
+	1    3650 1250
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
