@@ -1,12 +1,15 @@
+# Please check https://github.com/Toroid-io/drone-kicad for the full
+# plugin documentation
+
 pipeline:
   sample-build:
-    image: toroid/drone-kicad:0.5.1
-    pull: true
+    image: toroid/drone-kicad:0.5.1       # drone-kicad plugin
+    pull: true                            # always use latest image
     when:
-      branch: master
+      branch: master                      # only trigger on master branch
     projects:
-      - main: drone-kicad-sample
-        dependencies:
+      - main: drone-kicad-sample          # out first project, relative path, no extension
+        dependencies:                     # clone dependencies in default path (/usr/share/kicad)
           libraries:
             - https://github.com/Toroid-io/toroid-kicad-library.git
           templates:
@@ -15,21 +18,21 @@ pipeline:
             - https://github.com/yaqwsx/PcbDraw-Lib
           svglibdirs:
             - PcbDraw-Lib/KiCAD-base
-        options:
-          svg: true
+        options:                          # main PCB options
+          svg: true                       # SVG board plot
           grb:
-            all: true
-          sch: true
+            all: true                     # generate all gerber files
+          sch: true                       # export schematic in pdf
           tags:
-            all: true
+            all: true                     # tag board with date, commit SHA and tag if any
         variants:
-          - name: "Variant_1"
-            content: "sample1"
-            options:
+          - name: "Variant_1"             # name, used to postfix the variant
+            content: "sample1"            # this will match the "variant" field in components
+            options:                      # same as for the main PCB
               tags:
                 all: true
               svg: true
-              pcb: true
+              pcb: true                   # export the variant PCB file
               grb:
                 all: true
           - name: "Variant_2"
