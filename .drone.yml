@@ -3,7 +3,7 @@
 
 pipeline:
   sample-build:
-    image: toroid/drone-kicad:0.5.3       # drone-kicad plugin
+    image: toroid/drone-kicad:0.5.4       # drone-kicad plugin
     pull: true                            # always use latest image
     when:
       branch: master                      # only trigger on master branch
