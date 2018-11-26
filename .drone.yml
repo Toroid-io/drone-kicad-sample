@@ -3,10 +3,8 @@
 
 pipeline:
   sample-build:
-    image: toroid/drone-kicad:0.5.4       # drone-kicad plugin
+    image: toroid/drone-kicad:0.5.5       # drone-kicad plugin
     pull: true                            # always use latest image
-    when:
-      branch: master                      # only trigger on master branch
     projects:
       - main: drone-kicad-sample          # out first project, relative path, no extension
         dependencies:                     # clone dependencies in default path (/usr/share/kicad)
@@ -19,6 +17,7 @@ pipeline:
           svglibdirs:
             - PcbDraw-Lib/KiCAD-base
         options:                          # main PCB options
+          bom: true                       # XML and CSV BOM
           svg: true                       # SVG board plot
           grb:
             all: true                     # generate all gerber files
@@ -62,6 +61,7 @@ pipeline:
     files:
       - "CI-BUILD/*"
     when:
-      branch: master
+      event: push
+      branch: master                      # only deploy on master branch
       status: [success, failure]
     secrets: [mella_username, mella_password]
