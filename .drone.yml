@@ -61,6 +61,7 @@ pipeline:
     files:
       - "CI-BUILD/*"
     when:
+      event: push
       branch: master                      # only deploy on master branch
       status: [success, failure]
     secrets: [mella_username, mella_password]
