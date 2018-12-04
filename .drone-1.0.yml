@@ -1,12 +1,16 @@
-# This is an example of Drone 0.8.x pipeline
+# This is an example of Drone 1.0 pipeline
 #
 # Please check https://github.com/Toroid-io/drone-kicad for the full
 # plugin documentation
 
-pipeline:
-  sample-build:
-    image: toroid/drone-kicad:0.5.5       # drone-kicad plugin
-    pull: true                            # always use latest image
+kind: pipeline
+name: default
+
+steps:
+- name: sample-build
+  image: toroid/drone-kicad:0.5.5       # drone-kicad plugin
+  pull: true                            # always use latest image
+  settings:
     projects:
       - main: drone-kicad-sample          # out first project, relative path, no extension
         dependencies:                     # clone dependencies in default path (/usr/share/kicad)
@@ -55,15 +59,20 @@ pipeline:
               grb:
                 all: true
 
-  deploy:
-    image: toroid/drone-mella
+- name: deploy
+  image: toroid/drone-mella
+  settings:
     server: https://cloud.toroid.io
     remote_folder: "drone-kicad-sample"
     parentdir: false
     files:
       - "CI-BUILD/*"
-    when:
-      event: push
-      branch: master                      # only deploy on master branch
-      status: [success, failure]
-    secrets: [mella_username, mella_password]
+  when:
+    event: push
+    branch: master                      # only deploy on master branch
+    status: [success, failure]
+  environment:
+    MELLA_USERNAME:
+      from_secret: mella_username
+    MELLA_PASSWORD:
+      from_secret: mella_password
